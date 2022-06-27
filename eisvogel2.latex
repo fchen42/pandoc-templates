@@ -652,6 +652,9 @@ $endif$
   $endif$
 \fi
 
+% 文档历史
+\usepackage[tablegrid]{vhistory}
+
 %
 % heading color
 %
@@ -892,7 +895,7 @@ $else$
 $if(titlepage)$
 \begin{titlepage}
   \newgeometry{top=6cm}
-  {\centering \Huge \textbf{$title$} \\ \textbf{$subtitle$} \\ v1.0 \par}
+  {\centering \Huge \textbf{$title$} \\ \textbf{$subtitle$} \\ Ver. \vhCurrentVersion \par}
   \vspace{12 cm}
   {\centering \LARGE \textbf{$author$} \par}
   {\centering 地址：$address$ \\ 联系电话：$tel$ \par}
@@ -910,6 +913,18 @@ $if(toc-own-page)$
 \pagenumbering{Roman}
 \setcounter{page}{1}
 $endif$
+
+%% 修改历史
+\begin{versionhistory}
+	\renewcommand{\vhversionname}{版本号}
+	\renewcommand{\vhdatename}{修改日期}
+	\renewcommand{\vhauthorname}{作者}
+	\renewcommand{\vhchangename}{说明}
+  $for(vhistory)$
+	\vhEntry{$vhistory.number$}{$vhistory.date$}{$vhistory.author$}{$vhistory.comment$}
+  $endfor$
+\end{versionhistory}
+\newpage
 
 $if(has-frontmatter)$
 \frontmatter
