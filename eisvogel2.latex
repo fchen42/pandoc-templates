@@ -854,13 +854,15 @@ $if(disable-header-and-footer)$
 $else$
 \usepackage{fancyhdr}
 
+\newcommand{\copyrightstmt}{Copyright \copyright $author$}
+
 \fancypagestyle{eisvogel-header-footer}{
   \fancyhead{}
   \fancyfoot{}
-  \lhead[$if(header-right)$$header-right$$else$$date$$endif$]{$if(header-left)$$header-left$$else$$title$$endif$}
+  \lhead[$if(header-right)$$header-right$$else$$date$$endif$]{$if(header-left)$$header-left$$else$\fulltitle$endif$}
   \chead[$if(header-center)$$header-center$$else$$endif$]{$if(header-center)$$header-center$$else$$endif$}
-  \rhead[$if(header-left)$$header-left$$else$$title$$endif$]{$if(header-right)$$header-right$$else$$date$$endif$}
-  \lfoot[$if(footer-right)$$footer-right$$else$\thepage$endif$]{$if(footer-left)$$footer-left$$else$$for(author)$$author$$sep$, $endfor$$endif$}
+  \rhead[$if(header-left)$$header-left$$else$$title$$endif$]{$if(header-right)$$header-right$$else$$document-id$$endif$}
+  \lfoot[$if(footer-right)$$footer-right$$else$\thepage$endif$]{$if(footer-left)$$footer-left$$else$\copyrightstmt$endif$}
   \cfoot[$if(footer-center)$$footer-center$$else$$endif$]{$if(footer-center)$$footer-center$$else$$endif$}
   \rfoot[$if(footer-left)$$footer-left$$else$$for(author)$$author$$sep$, $endfor$$endif$]{$if(footer-right)$$footer-right$$else$\thepage$endif$}
   \renewcommand{\headrulewidth}{0.4pt}
@@ -887,6 +889,8 @@ $endif$
 
 \begin{document}
 
+\newcommand{\fulltitle}{$title$$subtitle$}
+
 %%
 %% begin titlepage
 %%
@@ -895,7 +899,8 @@ $else$
 $if(titlepage)$
 \begin{titlepage}
   \newgeometry{top=6cm}
-  {\centering \Huge \textbf{$title$} \\ \textbf{$subtitle$} \\ Ver. \vhCurrentVersion \par}
+  {\centering \Huge \textbf{\fulltitle} \\ \textbf{$document-id$} \par}
+  {\centering \LARGE \textbf{Ver. \vhCurrentVersion} \par}
   \vspace{12 cm}
   {\centering \LARGE \textbf{$author$} \par}
   {\centering 地址：$address$ \\ 联系电话：$tel$ \par}
