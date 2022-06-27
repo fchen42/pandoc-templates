@@ -957,6 +957,12 @@ $endif$
 $endif$
 $endif$
 
+%% 若 TOC 单独成页，则正文前的页码都使用罗马数字
+$if(toc-own-page)$
+\pagenumbering{Roman}
+\setcounter{page}{1}
+$endif$
+
 %%
 %% end titlepage
 %%
@@ -1023,6 +1029,13 @@ $endif$
 $if(has-frontmatter)$
 \mainmatter
 $endif$
+
+$if(toc-own-page)$
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+$endif$
+
 $body$
 
 $if(has-frontmatter)$
