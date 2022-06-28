@@ -1,0 +1,81 @@
+\documentclass{article}
+
+% 中文字体设定
+$if(CJKmainfont)$
+\usepackage{ctex}
+\setCJKmainfont{$CJKmainfont$}
+$endif$
+
+% 英文字体设定
+\setmainfont{Palatino Linotype}
+\setsansfont{Lucida Sans Typewriter}
+\setmonofont{Consolas}
+
+% 交叉引用
+\usepackage{hyperref}
+% 交叉引用样式
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks = false,
+    linkbordercolor = {white}
+}
+
+% 表格
+\usepackage{longtable, booktabs}
+
+% 图片
+\usepackage{graphicx}
+\usepackage{float}
+% 没有下面这些内容，图片会拉长，布满整个页面
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to H
+\makeatletter
+\def\fps@figure{H}
+\makeatother
+
+% 脚注设定
+\usepackage[perpage, bottom]{footmisc}
+
+% 代码块
+\usepackage{listings}
+\definecolor{listing-background}{HTML}{F7F7F7}
+\lstset{
+	xleftmargin = 0.6em,
+    xrightmargin = 0.4em,
+    aboveskip = 1.0em,
+    belowskip = 0.1em,
+    backgroundcolor = \color{listing-background},
+    breaklines = true,
+	basicstyle = \ttfamily  % ttfamily: 选择等宽字体族
+}
+% 没有这句时，行内代码会导致编译报错
+\newcommand{\passthrough}[1]{\lstset{mathescape=false}#1\lstset{mathescape=true}}
+
+% 页面设定
+\usepackage{geometry}
+\newgeometry{margin=2cm}
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+\begin{document}
+\makeatletter
+\renewcommand\maketitle{
+{\centering \Huge \textbf{$title$} \par}
+{\flushright 报告人：$author$ \hspace{2ex} 日期：$date$ \par}
+} % Note the extra }
+\makeatother
+
+% 标题
+\maketitle
+
+$body$
+\end{document}
