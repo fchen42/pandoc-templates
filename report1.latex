@@ -11,6 +11,9 @@ $endif$
 \setsansfont{Lucida Sans Typewriter}
 \setmonofont{Consolas}
 
+% 修改字体大小，需要在引入字体设定之后进行
+%\usepackage[fontsize=14pt]{fontsize}
+
 % 交叉引用
 \usepackage{hyperref}
 % 交叉引用样式
