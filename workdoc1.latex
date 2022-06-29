@@ -1,0 +1,131 @@
+\documentclass{article}
+
+% 中文字体设定
+$if(CJKmainfont)$
+\usepackage{ctex}
+\setCJKmainfont{$CJKmainfont$}
+$endif$
+
+% 英文字体设定
+\setmainfont{Palatino Linotype}
+\setsansfont{Lucida Sans Typewriter}
+\setmonofont{Consolas}
+
+% 修改字体大小，需要在引入字体设定之后进行
+%\usepackage[fontsize=14pt]{fontsize}
+
+\usepackage[tablegrid]{vhistory}
+
+% 交叉引用
+\usepackage{hyperref}
+% 交叉引用样式
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks = false,
+    linkbordercolor = {white}
+}
+
+% 表格
+\usepackage{longtable, booktabs}
+
+% 图片
+\usepackage{graphicx}
+\usepackage{float}
+% 没有下面这些内容，图片会拉长，布满整个页面
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to H
+\makeatletter
+\def\fps@figure{H}
+\makeatother
+
+% 脚注设定
+\usepackage[perpage, bottom]{footmisc}
+
+% 代码块
+\usepackage{listings}
+\definecolor{listing-background}{HTML}{F7F7F7}
+\lstset{
+	xleftmargin = 0.6em,
+    xrightmargin = 0.4em,
+    aboveskip = 1.0em,
+    belowskip = 0.1em,
+    backgroundcolor = \color{listing-background},
+    breaklines = true,
+	basicstyle = \ttfamily  % ttfamily: 选择等宽字体族
+}
+% 没有这句时，行内代码会导致编译报错
+\newcommand{\passthrough}[1]{\lstset{mathescape=false}#1\lstset{mathescape=true}}
+
+% 页面设定
+\usepackage{geometry}
+\newgeometry{top=1.5cm,bottom=1.5cm,left=2cm,right=2cm,includehead=true,includefoot=true}
+
+% 页眉页脚
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{$title$$subtitle$} 
+\chead{} 
+\rhead{$document-id$} 
+\lfoot{Copyright \copyright \, \the\year $author$} 
+\cfoot{}
+\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt} 
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+% 没有下面这个，编译列表时会报错
+\providecommand{\tightlist}{
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+\begin{document}
+
+% 封面页
+\begin{titlepage}
+    \newgeometry{top=6cm}
+    {\centering \Huge \textbf{$title$} \\ \textbf{$subtitle$} \\ \textbf{$document-id$} \par}
+    {\centering \LARGE \textbf{Ver. \vhCurrentVersion} \par}
+    \vspace{11cm}
+    {\centering \LARGE \textbf{$author$} \par}
+    \vspace{0.5cm}
+    {\centering 地址：$address$ \\ 联系电话：$tel$ \par}
+\end{titlepage}
+\restoregeometry
+
+% 修订历史
+\thispagestyle{empty}
+\begin{versionhistory}
+	\renewcommand{\vhversionname}{版本号}
+	\renewcommand{\vhdatename}{修改日期}
+	\renewcommand{\vhauthorname}{作者}
+	\renewcommand{\vhchangename}{说明}
+  $for(vhistory)$
+	\vhEntry{$vhistory.number$}{$vhistory.date$}{$vhistory.author$}{$vhistory.comment$}
+  $endfor$
+\end{versionhistory}
+\newpage
+
+% 正文前的页码使用罗马数字
+\pagenumbering{Roman}
+\setcounter{page}{1}
+
+% 目录
+\tableofcontents
+
+% 正文页码使用阿拉伯数字
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+$body$
+\end{document}
