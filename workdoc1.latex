@@ -84,6 +84,13 @@ $endif$
 \providecommand{\tightlist}{
 \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
+\definecolor{blockquote-border}{RGB}{221,221,221}
+\definecolor{blockquote-text}{RGB}{119,119,119}
+\usepackage{mdframed}
+\newmdenv[rightline=false,bottomline=false,topline=false,linewidth=2pt,linecolor=blockquote-border,skipabove=1.5em,skipbelow=1.5em]{customblockquote}
+\renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
+\item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
+
 $for(header-includes)$
 $header-includes$
 $endfor$
